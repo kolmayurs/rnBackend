@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use('/user', userController);
 
-var server = app.listen(4000, () => {
-    console.log("App listen to port " + server.address().port)
+var port=Number(process.env.PORT || 4000);
+app.listen(port, () => {
+	console.log('Product server listing from port ' + port);
 })
