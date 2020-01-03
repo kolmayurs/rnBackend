@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use('/user', userController);
 
-var port=Number(process.env.PORT || 4000);
+var port=Number(process.env.PORT || 4001);
 app.listen(port, () => {
 	console.log('Product server listing from port ' + port);
 })
