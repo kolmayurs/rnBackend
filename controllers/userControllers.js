@@ -9,6 +9,7 @@ router.get('/user', authenticate, (req, res) => {
 });
 
 router.post('/create', (req, res) => {
+    res.header("Access-Control-Allow-Headers", "x-requested-with, x-requested-by");
     const userData = {
         name: req.body.name,
         email: req.body.email,
