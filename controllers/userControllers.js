@@ -1,14 +1,27 @@
 const express = require('express');
+const cors = require('cors')
+
 const router = express.Router();
 
 const User = require('../models/user');
 const authenticate = require('../middlewares/authenticate');
 
+var whitelist = ['http://localhost:3000']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 router.get('/user', authenticate, (req, res) => {
     res.send(req.user);
 });
 
-router.post('/create', (req, res) => {
+router.post('/create', cors(corsOptions), (req, res) => {
     const userData = {
         name: req.body.name,
         email: req.body.email,
