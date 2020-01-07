@@ -32,6 +32,7 @@ router.post('/create', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+    res.header("Access-Control-Allow-Headers", "x-requested-with, x-requested-by");
     User.findUserByCredentials(req.body.email, req.body.password).then((user) => {
         user.generateAuthToken().then((token) => {
             res.header({ 'x-auth': token }).send(user);
@@ -40,6 +41,7 @@ router.post('/login', (req, res) => {
 });
 
 router.delete('/logout', authenticate, (req, res) => {
+    res.header("Access-Control-Allow-Headers", "x-requested-with, x-requested-by");
     req.user.removeToken().then(() => {
         res.status(200).send("User Logged Out");
     }).catch(() => {
